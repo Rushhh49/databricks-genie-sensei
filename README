@@ -1,6 +1,6 @@
 # Sensei: Data Ingestion & Semantic Analysis Platform
 
-This repository contains the `nodejs-fastapi-hello-world-app` project, a Next.js application named "Sensei" designed to streamline the process of uploading, profiling, cleaning, and semantically enriching datasets using Databricks. It guides users through creating a session, uploading a file, processing the data with Databricks jobs, clarifying ambiguous column meanings, and finally setting up a Databricks Genie space for interactive semantic analysis and chat.
+This repository contains the `databricks-genie-sensei` project, a Next.js application named "Sensei" designed to streamline the process of uploading, profiling, cleaning, and semantically enriching datasets using Databricks. It guides users through creating a session, uploading a file, processing the data with Databricks jobs, clarifying ambiguous column meanings, and finally setting up a Databricks Genie space for interactive semantic analysis and chat.
 
 ## Features
 
@@ -31,31 +31,31 @@ Follow these steps to get the project up and running on your local machine.
 
 ### 1. Clone the Repository
 
-```bash
-git clone <https://github.com/your-username/nodejs-fastapi-hello-world-app.git>
+
+git clone <https://github.com/Rushhh49/databricks-genie-sensei.git>
 cd nodejs-fastapi-hello-world-app
-```
+
 
 ### 2. Install Dependencies
 
-```bash
+
 npm install
 # or
 yarn install
-```
+
 
 ### 3. Environment Variables
 
 Create a `.env.local` file in the root of your project directory and populate it with your Databricks configuration:
 
-```
+
 DATABRICKS_HOST=https://<your-databricks-workspace-url>
 DATABRICKS_PAT=<your-databricks-personal-access-token>
 DATABRICKS_JOB_ID_1=<your-databricks-job-id-for-profiling>
 DATABRICKS_JOB_ID_2=<your-databricks-job-id-for-finalization>
 DATABRICKS_WAREHOUSE_ID=<your-databricks-sql-warehouse-id>
 DATABRICKS_SPACE_ID=<your-databricks-genie-space-id> # Required for Genie features
-```
+
 
 -   Replace `<your-databricks-workspace-url>` with the URL of your Databricks workspace (e.g., `adb-<workspace-id>.<region>.azuredatabricks.net`).
 -   Generate a Databricks Personal Access Token and replace `<your-databricks-personal-access-token>`.
@@ -65,11 +65,10 @@ DATABRICKS_SPACE_ID=<your-databricks-genie-space-id> # Required for Genie featur
 
 ### 4. Run the Application
 
-```bash
 npm run dev
 # or
 yarn dev
-```
+
 
 The application will start and be accessible at `http://localhost:3000`.
 
@@ -81,7 +80,3 @@ The application will start and be accessible at `http://localhost:3000`.
 4.  The application will trigger Databricks jobs to profile and process your data.
 5.  If the system requires further clarification on certain columns, you will be prompted to provide answers.
 6.  Once data processing and clarification are complete, a Databricks Genie space will be configured, and you will be redirected to a chat interface to interact with your semantically enriched data using natural language.
-```
-<!--
-[PROMPT_SUGGESTION]Can you explain the purpose of the `ClarificationForm` component and how it integrates with the Databricks jobs?[/PROMPT_SUGGESTION]
-[PROMPT_SUGGESTION]How can I set up the Databricks jobs (Job 1 and Job 2) mentioned in the README?[/PROMPT_SUGGESTION]
