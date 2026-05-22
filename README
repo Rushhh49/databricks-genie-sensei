@@ -1,57 +1,87 @@
-# Node.js + FastAPI Hello World App
+# Sensei: Data Ingestion & Semantic Analysis Platform
 
-A simple hello world template that demonstrates how to build full-stack applications using Node.js (React) frontend with FastAPI backend for Databricks Apps.
+This repository contains the `nodejs-fastapi-hello-world-app` project, a Next.js application named "Sensei" designed to streamline the process of uploading, profiling, cleaning, and semantically enriching datasets using Databricks. It guides users through creating a session, uploading a file, processing the data with Databricks jobs, clarifying ambiguous column meanings, and finally setting up a Databricks Genie space for interactive semantic analysis and chat.
 
-## Architecture
+## Features
 
-```
-React Frontend (TypeScript + Vite)
-    ↓ API calls
-FastAPI Backend (Python)
-    ↓ Serves static files + API
-Databricks Apps
-```
+-   **Session Management:** Create and manage distinct data processing sessions.
+-   **File Upload:** Securely upload various dataset formats (e.g., CSV, Parquet).
+-   **Databricks Integration:** Seamlessly integrates with Databricks for:
+    -   Data profiling (Job 1).
+    -   Data quality checks and finalization (Job 2).
+    -   Executing SQL statements against a Databricks SQL Warehouse.
+-   **Interactive Clarification:** Prompts users for input to clarify ambiguous column semantics, improving data quality and understanding.
+-   **Databricks Genie Space Configuration:** Dynamically configures and registers Databricks Genie spaces, enabling AI-powered natural language interaction with your processed data.
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed and configured:
+
+-   **Node.js:** Version 18 or higher.
+-   **npm or Yarn:** A package manager for Node.js.
+-   **Databricks Workspace:** Access to a Databricks workspace with:
+    -   A **SQL Warehouse** for executing SQL queries.
+    -   **Databricks Jobs** configured for data processing. You will need two job IDs: one for initial profiling and another for finalization/quality checks.
+    -   (Optional) A **Databricks Genie Space** if you plan to utilize the AI chat features.
+-   **Databricks Personal Access Token (PAT):** A PAT with sufficient permissions to interact with Databricks Jobs, SQL Warehouses, and Genie APIs.
 
 ## Setup
 
-1. **Install Python dependencies:**
+Follow these steps to get the project up and running on your local machine.
+
+### 1. Clone the Repository
+
 ```bash
-pip install -r requirements.txt
+git clone <https://github.com/your-username/nodejs-fastapi-hello-world-app.git>
+cd nodejs-fastapi-hello-world-app
 ```
 
-2. **Install Node.js dependencies:**
+### 2. Install Dependencies
+
 ```bash
 npm install
+# or
+yarn install
 ```
 
-## Development
+### 3. Environment Variables
 
-1. **Start FastAPI backend:**
-```bash
-uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+Create a `.env.local` file in the root of your project directory and populate it with your Databricks configuration:
+
+```
+DATABRICKS_HOST=https://<your-databricks-workspace-url>
+DATABRICKS_PAT=<your-databricks-personal-access-token>
+DATABRICKS_JOB_ID_1=<your-databricks-job-id-for-profiling>
+DATABRICKS_JOB_ID_2=<your-databricks-job-id-for-finalization>
+DATABRICKS_WAREHOUSE_ID=<your-databricks-sql-warehouse-id>
+DATABRICKS_SPACE_ID=<your-databricks-genie-space-id> # Required for Genie features
 ```
 
-2. **In another terminal, start React dev server:**
+-   Replace `<your-databricks-workspace-url>` with the URL of your Databricks workspace (e.g., `adb-<workspace-id>.<region>.azuredatabricks.net`).
+-   Generate a Databricks Personal Access Token and replace `<your-databricks-personal-access-token>`.
+-   Obtain the Job IDs for your Databricks profiling and finalization jobs and replace `<your-databricks-job-id-for-profiling>` and `<your-databricks-job-id-for-finalization>`.
+-   Find your Databricks SQL Warehouse ID and replace `<your-databricks-sql-warehouse-id>`.
+-   If you are using Databricks Genie, provide the Space ID and replace `<your-databricks-genie-space-id>`.
+
+### 4. Run the Application
+
 ```bash
 npm run dev
+# or
+yarn dev
 ```
 
-- Frontend: http://localhost:5173 (with API proxy)
-- Backend API docs: http://localhost:8000/docs
+The application will start and be accessible at `http://localhost:3000`.
 
-## Production
+## Usage
 
-Build and run:
-```bash
-npm run build
-uvicorn backend.main:app --host 0.0.0.0 --port 8000
+1.  Navigate to `http://localhost:3000` in your web browser.
+2.  Click the "Create New Session" button to initiate a new data processing workflow.
+3.  Upload your dataset file (e.g., CSV, Parquet).
+4.  The application will trigger Databricks jobs to profile and process your data.
+5.  If the system requires further clarification on certain columns, you will be prompted to provide answers.
+6.  Once data processing and clarification are complete, a Databricks Genie space will be configured, and you will be redirected to a chat interface to interact with your semantically enriched data using natural language.
 ```
-
-## Databricks Apps Deployment
-
-Configured for Databricks Apps with `app.yaml`. Uses `DATABRICKS_APP_PORT` environment variable automatically.
-
-## API
-
-- `GET /api/hello` - Hello world message
-- `GET /docs` - FastAPI interactive documentation
+<!--
+[PROMPT_SUGGESTION]Can you explain the purpose of the `ClarificationForm` component and how it integrates with the Databricks jobs?[/PROMPT_SUGGESTION]
+[PROMPT_SUGGESTION]How can I set up the Databricks jobs (Job 1 and Job 2) mentioned in the README?[/PROMPT_SUGGESTION]
