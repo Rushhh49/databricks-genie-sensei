@@ -1,0 +1,7 @@
+{
+  "/api/genie/start/route": "app/api/genie/start/route.js",
+  "/api/genie/message/route": "app/api/genie/message/route.js",
+  "/upload/page": "app/upload/page.js",
+  "/chat/page": "app/chat/page.js",
+  "/api/genie/poll/route": "app/api/genie/poll/route.js"
+}

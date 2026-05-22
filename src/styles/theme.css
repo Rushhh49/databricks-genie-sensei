@@ -1,0 +1,6 @@
+:root {
+  --background: theme('colors.background');
+  --card: theme('colors.accent');
+  --border: theme('colors.primary');
+  --accent: theme('colors.accent');
+}
