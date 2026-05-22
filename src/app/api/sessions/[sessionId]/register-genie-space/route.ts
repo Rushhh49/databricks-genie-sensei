@@ -70,16 +70,9 @@ export async function POST(req: NextRequest, { params }: RegisterGenieSpaceParam
         
         // STEP 5: UPDATE TABLES
         if (!spaceJson.data_sources) spaceJson.data_sources = {};
-        if (!spaceJson.data_sources.tables) spaceJson.data_sources.tables = [];
         
-        const existingTables = spaceJson.data_sources.tables;
-        let filteredTables = existingTables.filter((t: any) => t.identifier !== targetTable);
-        filteredTables.push(tableObject);
-
-        // Sort the tables by identifier, as required by the API
-        filteredTables = filteredTables.sort((a: any, b: any) => a.identifier.localeCompare(b.identifier));
-
-        spaceJson.data_sources.tables = filteredTables;
+        // Only include the newly created table
+        spaceJson.data_sources.tables = [tableObject];
         
         // STEP 6: BUILD & UPDATE INSTRUCTIONS
         if (!spaceJson.instructions) spaceJson.instructions = {};
